@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arduino Data Display</title>
+    <script>
+        //Função para conectar-se ao servidor e receber os dados
+        function conectarServidor() {
+            //onecta-se ao servidor na porta 8080
+            var ws = new WebSocket("ws://127.0.0.1:8080");
+
+            // Função para processar os dados recebidos
+            ws.onmessage = function(event) {
+                //Atualiza o elemento HTML com os dados recebidos
+                document.getElementById("dados").innerText = event.data;
+            };
+        }
+
+        //Chama a função de conexão ao carregar a página
+        window.onload = conectarServidor;
+    </script>
+</head>
+<body>
+    <h1>Dados do Arduino:</h1>
+    <div id="dados"></div>
+</body>
+</html>
